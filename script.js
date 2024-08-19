@@ -83,13 +83,49 @@ function loadTasks() {
     });
 }
 
+// Function to filter tasks
+function filterTasks(status) {
+    const tasks = document.querySelectorAll('.task-item');
+    tasks.forEach(task => {
+        const isCompleted = task.classList.contains('completed');
+        if (status === 'all' || (status === 'completed' && isCompleted) || (status === 'pending' && !isCompleted)) {
+            task.style.display = 'flex';
+        } else {
+            task.style.display = 'none';
+        }
+    });
+}
+
+// Add filter buttons
+function addFilterButtons() {
+    const allButton = document.createElement('button');
+    allButton.textContent = 'Show All';
+    allButton.addEventListener('click', () => filterTasks('all'));
+    
+    const completedButton = document.createElement('button');
+    completedButton.textContent = 'Show Completed';
+    completedButton.addEventListener('click', () => filterTasks('completed'));
+
+    const pendingButton = document.createElement('button');
+    pendingButton.textContent = 'Show Pending';
+    pendingButton.addEventListener('click', () => filterTasks('pending'));
+
+    document.body.insertBefore(allButton, taskForm);
+    document.body.insertBefore(completedButton, taskForm);
+    document.body.insertBefore(pendingButton, taskForm);
+}
+
 // Event listeners
 taskForm.addEventListener('submit', addTask);
 markAllButton.addEventListener('click', markAllCompleted);
 
 // Load tasks when the page loads
-document.addEventListener('DOMContentLoaded', loadTasks);
+document.addEventListener('DOMContentLoaded', () => {
+    loadTasks();
+    addFilterButtons();
+});
 
 // Example of BOM properties/methods usage
 console.log('Window width:', window.innerWidth);
 alert('Welcome to the To-Do List Manager!');
+
