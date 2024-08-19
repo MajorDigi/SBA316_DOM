@@ -3,7 +3,7 @@
 # To-Do List Manager
 
 A simple To-Do List Manager application built with HTML, CSS, and JavaScript.
-
+GitHub Pages link: https://majordigi.github.io/SBA316_DOM/
 ## Features
 - Add tasks to the list
 - Mark tasks as completed
